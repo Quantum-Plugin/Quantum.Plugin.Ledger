@@ -1,0 +1,50 @@
+{
+  "id": "quantum.plugin.ledger",
+  "version": "0.6.0",
+  "entryAssembly": "Quantum.LedgerPlugin.dll",
+  "database": {
+    "migrations": "./migrations"
+  },
+  "ui": {
+    "routes": [
+      {
+        "path": "/plugins/ledger",
+        "component": "Quantum.OfficialPlugins.Ledger.UI.Pages.Ledger",
+        "title": "记账",
+        "titles": {
+          "en": "Ledger",
+          "zh": "记账"
+        },
+        "icon": "¥",
+        "order": 120,
+        "showInNavigation": true,
+        "iconFile": "icons/plugin.ico"
+      }
+    ]
+  },
+  "web": {
+    "head": [
+      "<link rel=\"stylesheet\" href=\"_content/quantum.plugin.ledger/ledger.css\">"
+    ],
+    "postBlazor": []
+  },
+  "capabilities": {
+    "provides": [
+      "ledger.by-calendar-entry",
+      "ledger.create",
+      "ledger.delete",
+      "ledger.get",
+      "ledger.list",
+      "ledger.mobile-create",
+      "ledger.mobile-refresh",
+      "ledger.related",
+      "ledger.summary",
+      "ledger.update"
+    ],
+    "requires": [],
+    "integrates": [
+      "calendar.list",
+      "calendar.get"
+    ]
+  }
+}

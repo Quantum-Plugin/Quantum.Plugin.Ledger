@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/Quantum.LedgerPlugin/Quantum.LedgerPlugin.csproj" />
+  <Project Path="tests/Quantum.LedgerPlugin.Tests/Quantum.LedgerPlugin.Tests.csproj" />
+</Solution>
