@@ -26,3 +26,5 @@ Preserve existing [CLR](glossary.md#clr) names, named requests, route components
 - [RefreshLedgerMobilePageRequest.cs](../../src/Quantum.LedgerPlugin/Contract/Requests/RefreshLedgerMobilePageRequest.cs)
 - [SaveLedgerEntryRequest.cs](../../src/Quantum.LedgerPlugin/Contract/Requests/SaveLedgerEntryRequest.cs)
 - [UpdateLedgerEntryRequest.cs](../../src/Quantum.LedgerPlugin/Contract/Requests/UpdateLedgerEntryRequest.cs)
+
+Calendar integration consumes `calendar.entry.list` and `calendar.entry.get` for both events and tasks. Repeated occurrences are grouped by series ID within each provider when choosing links; conflicting IDs from separate providers remain ambiguous.

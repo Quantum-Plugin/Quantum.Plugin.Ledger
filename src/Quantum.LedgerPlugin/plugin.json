@@ -1,6 +1,6 @@
 {
   "id": "quantum.plugin.ledger",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "entryAssembly": "Quantum.LedgerPlugin.dll",
   "database": {
     "migrations": "./migrations"
@@ -43,8 +43,8 @@
     ],
     "requires": [],
     "integrates": [
-      "calendar.list",
-      "calendar.get"
+      "calendar.entry.list",
+      "calendar.entry.get"
     ]
   }
 }

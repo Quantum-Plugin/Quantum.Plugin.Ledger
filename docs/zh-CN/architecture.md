@@ -26,3 +26,5 @@
 - [RefreshLedgerMobilePageRequest.cs](../../src/Quantum.LedgerPlugin/Contract/Requests/RefreshLedgerMobilePageRequest.cs)
 - [SaveLedgerEntryRequest.cs](../../src/Quantum.LedgerPlugin/Contract/Requests/SaveLedgerEntryRequest.cs)
 - [UpdateLedgerEntryRequest.cs](../../src/Quantum.LedgerPlugin/Contract/Requests/UpdateLedgerEntryRequest.cs)
+
+日历联动通过 `calendar.entry.list` 和 `calendar.entry.get` 读取日程和待办。选择关联时，同一提供方的重复实例按系列 ID 合并；不同提供方之间冲突的 ID 仍视为歧义。

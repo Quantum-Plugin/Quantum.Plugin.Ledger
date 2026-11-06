@@ -33,8 +33,8 @@ public partial class Ledger
                 return;
             }
 
-            _canListCalendar = capabilities.Contains("calendar.list");
-            _canGetCalendar = capabilities.Contains("calendar.get");
+            _canListCalendar = capabilities.Contains("calendar.entry.list");
+            _canGetCalendar = capabilities.Contains("calendar.entry.get");
         }
         catch (Exception exception) when (exception is not OperationCanceledException)
         {
@@ -70,14 +70,14 @@ public partial class Ledger
             startDate = start,
             endDate = start.AddMonths(1).AddDays(-1)
         };
-        var responses = await _invoker!.RequestAsync<CalendarLinkDetails[]>("calendar.list", request, Context.Empty);
+        var responses = await _invoker!.RequestAsync<CalendarLinkDetails[]>("calendar.entry.list", request, Context.Empty);
         if (!IsSuccessful(responses))
         {
             return;
         }
 
         var outcomes = responses.Value!.Outcomes;
-        _calendarCandidates = outcomes.Where(outcome => outcome.Status == QuantumRequestStatus.Handled).SelectMany(outcome => outcome.Value ?? []).GroupBy(entry => entry.Id).Where(group => group.Count() == 1).Select(group => group.Single()).ToArray();
+        _calendarCandidates = outcomes.Where(outcome => outcome.Status == QuantumRequestStatus.Handled).SelectMany(outcome => (outcome.Value ?? []).DistinctBy(entry => entry.Id)).GroupBy(entry => entry.Id).Where(group => group.Count() == 1).Select(group => group.Single()).ToArray();
         if (outcomes.Count == 0 || outcomes.Any(outcome => outcome.Status is QuantumRequestStatus.Failed or QuantumRequestStatus.TimedOut))
         {
             _error = L["Calendar unavailable. Saved links are preserved."];
@@ -112,7 +112,7 @@ public partial class Ledger
         List<(Guid Id, CalendarLinkDetails? Entry)> links = [];
         foreach (var id in item.CalendarEntryIds ?? [])
         {
-            var responses = await _invoker!.RequestAsync<CalendarLinkLookup>("calendar.get", new { id }, Context.Empty);
+            var responses = await _invoker!.RequestAsync<CalendarLinkLookup>("calendar.entry.get", new { id }, Context.Empty);
             if (!IsSuccessful(responses))
             {
                 return;
